@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block titulo %}
+Criar Conta
+{% endblock %}
+
+{% block content %}
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!--<script>-->
+<!--  setInterval(function() {-->
+<!--    location.reload();-->
+<!--  }, 15000);-->
+<!--</script>-->
+
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['gauge']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+
+    var data = google.visualization.arrayToDataTable([
+      ['Label', 'Value'],
+      ['OEE', {{ percentual_de_oee }}],
+    ]);
+
+    var options = {
+      width: 400, height: 120,
+      greenFrom: 80, greenTo: 100,
+      yellowFrom: 60, yellowTo: 80,
+      redFrom: 0, redTo: 60,
+      minorTicks: 5
+    };
+
+    var chart = new google.visualization.Gauge(document.getElementById('chart_div'));
+    chart.draw(data, options);
+  }
+</script>
+
+
+    <header class="min-h-screen bg-black bg-opacity-50 bg-blend-overlay showcase border-gray-600 border-b-8 flex justify-center items-center bg-no-repeat" style="background-image: url('{% static 'imagens/fundo_azul.jpg' %}'); width: 100%;">
+        <div class="z-10 h-full py-32 md:py-0 text-gray-100 text-center flex items-center flex-col" style="width: 100%;">
+
+            <div style="line-height: 1.5;">
+                <h5 class="card-title" style="color: white; font-size: 20px;"><strong>{{ mostrar_cod_maquina }} • {{ mostrar_data_inicio }} {{ mostrar_hora_inicio }}hr a {{ mostrar_data_fim }} {{ mostrar_hora_fim }}hs</strong></h5>
+                <br>
+            </div>
+
+            <div class="card-group" style="width: 100%;">
+                <div class="card" style="flex: 1 1 10rem; background-color: #A3C2E1; border-color: transparent;">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: black; font-size: 20px;"><strong>Produção Pç:</strong></h5>
+                        <p class="card-text" style="color: black; font-size: 50px;"><strong>{{ mostrar_producao_liquida }}</strong></p>
+                    </div>
+                </div>
+
+                <div class="card" style="flex: 1 1 10rem; background-color: #A3C2E1; border-color: transparent;">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: black; font-size: 20px;"><strong>Perda Pç:</strong></h5>
+                        <p class="card-text" style="color: black; font-size: 50px;"><strong>{{ mostrar_perda }}</strong></p>
+                    </div>
+                </div>
+
+                <div class="card" style="flex: 1 1 10rem; background-color: #A3C2E1;">
+                    <div class="card-body">
+                        <br>
+                        <h5 class="card-title" style="color: black;"><strong>Tempo Produzindo: {{ mostrar_horas_minutos_segundos_produzindo }}</strong></h5>
+                        <hr>
+                        <h5 class="card-title" style="color: black;"><strong>Tempo Parado: {{ mostrar_horas_minutos_segundos_parados }}</strong></h5>
+                    </div>
+                </div>
+            </div>
+
+<div style="line-height: 0.5;">
+    <br>
+</div>
+
+            <div class="card-group" style="width: 100%;">
+
+                <div class="card" style="flex: 1 1 10rem; background-color: #A3C2E1; border-color: transparent;">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: black;"><strong>Operador:</strong></h5>
+                        <h5 class="card-title" style="color: black;"><strong>{{ mostrar_operador }}</strong></h5>
+                    </div>
+                </div>
+
+                <div class="card" style="flex: 1 1 10rem; background-color: #A3C2E1; border-color: transparent;">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: black;"><strong>{{ mostrar_produto }}</strong></h5>
+                        <h5 class="card-title" style="color: black;"><strong>{{ mostrar_ordem_de_producao }}</strong></h5>
+                        <h5 class="card-title" style="color: black;"><strong>{{ mostrar_cliente }}</strong></h5>
+                    </div>
+                </div>
+
+
+                <div class="card" style="flex: 1 1 10rem; background-color: #A3C2E1;">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: black; font-size: 20px;"><strong>Ferramentas:</strong></h5>
+
+                        <a href="/pag_teste?maq={{ mostrar_cod_maquina }}&dt_in={{ mostrar_data_inicio }}&hr_in={{ mostrar_hora_inicio }}&dt_fi={{ mostrar_data_fim }}&hr_fi={{ mostrar_hora_fim }}" class="btn btn-dark">Classificar Paradas</a>
+                    </div>
+                </div>
+            </div>
+
+<div style="line-height: 0.5;">
+    <br>
+</div>
+
+            <div class="card-group" style="width: 100%;">
+                <div class="card" style="flex: 1 1 10rem; background-color: #A3C2E1; border-color: transparent;">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: black;"><strong>Disponibilidade: {{ mostrar_percentual_de_disponibilidade }}</strong></h5>
+                        <h5 class="card-title" style="color: black;"><strong>Produtividade: {{ mostrar_percentual_de_produtividade }}</strong></h5>
+                        <h5 class="card-title" style="color: black;"><strong>Qualidade: {{ mostrar_percentual_de_qualidade }}</strong></h5>
+                        <h5 class="card-title" style="color: black;"><strong>OEE: {{ mostrar_percentual_de_oee }}</strong></h5>
+                    </div>
+                </div>
+
+
+                <div class="card" style="flex: 1 1 10rem; background-color: #A3C2E1; border-color: transparent;">
+                    <div class="card-body d-flex justify-content-center align-items-center">
+                        <div id="chart_div" style="width: 400px; height: 120px; margin-left: 35%;"></div>
+                    </div>
+                </div>
+
+
+<!--                <div class="card" style="flex: 1 1 10rem; background-color: #A3C2E1;">-->
+<!--                    <div class="card-body">-->
+<!--                        <div id="myChart" style="width: 400px; height: 120px;"></div>-->
+<!--                        <canvas id="myChart"></canvas>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+
+                <div class="card" style="flex: 1 1 10rem; background-color: #A3C2E1;">
+                    <div class="card-body">
+                        <br>
+                        <h5 class="card-title" style="color: black;"><strong>Peça/Hora Capc.: {{ mostrar_peca_hora }}</strong></h5>
+                        <hr>
+                        <h5 class="card-title" style="color: black;"><strong>Peça/Hora Atual: {{ mostrar_peca_hora_ultimas_100 }}</strong></h5>
+                    </div>
+                </div>
+            </div>
+
+<div style="line-height: 2;">
+    <br>
+</div>
+
+            <div class="card-group" style="width: 100%;">
+                <div class="card" style="flex: 1 1 10rem; background-color: {{ mostrar_cor_status }}; border-color: transparent;">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: black; padding-top: 5px; font-size: 20px;"><strong>{{ mostrar_status_maquina }}</strong></h5>
+                    </div>
+                </div>
+
+                <div class="card" style="flex: 1 1 10rem; background-color: {{ mostrar_cor_status }};">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: black; padding-top: 8px;"><strong>{{ mostrar_hora_ultimo_ciclo }} {{ mostrar_data_ultimo_ciclo }}</strong></h5>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </header>
+
+    <footer class=" px-5 py-10 ">
+        <ul class="flex justify-between items-center">
+
+            <li>&copy; 2023</li>
+            <li> Feito com Python (Django)</li>
+            <li>Condutec</li>
+        </ul>
+    </footer>
+
+<script>
+const data = {
+  labels: [
+    'OEE.',
+    'Disp.',
+    'Prod.',
+    'Qual.',
+    'P/Hr.'
+  ],
+  datasets: [{
+    label: 'titulo aqui',
+    data: [33, 42, 80, 100, 50],
+    fill: true,
+    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+    borderColor: 'rgb(54, 162, 235)',
+    pointBackgroundColor: 'rgb(54, 162, 235)',
+    pointBorderColor: '#fff',
+    pointHoverBackgroundColor: '#fff',
+    pointHoverBorderColor: 'rgb(54, 162, 235)'
+  }, ]
+};
+
+const config = {
+  type: 'radar',
+  data: data,
+  options: {
+    elements: {
+      line: {
+        borderWidth: 3
+      }
+    }
+  },
+};
+
+var ctx = document.getElementById('myChart').getContext('2d');
+new Chart(ctx, config);
+</script>
+
+{% endblock %}

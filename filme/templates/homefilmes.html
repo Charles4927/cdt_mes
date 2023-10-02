@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+(home) Sistema - CDT-MES
+{% endblock %}
+
+{% block head %}
+<style>
+    #id_email{
+    width: 100%;
+    color: #000000;
+    padding: 5px 5px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <header class="min-h-screen bg-black bg-opacity-50 bg-blend-overlay showcase border-gray-600 border-b-8 flex justify-center items-center bg-no-repeat"  style="background-image: url('{% static 'imagens/fundo_azul.jpg' %}');">
+        <div class="z-10 h-full py-32 md:py-0 text-gray-100 text-center flex items-center flex-col">
+
+            <div class="card-group" style="flex: 1 1 15rem; background-color: transparent;">
+
+              <div class="card" style="flex: 1 1 15rem; background-color: transparent; border-color: transparent;">
+<!--                  https://drive.google.com/file/d/1TXU6_JGCbgzJ2wMZKna_00N0NrJ9bGHc/view?usp=drive_link-->
+                  <a href="/pag_form_prod"><img src="https://drive.google.com/uc?id=1TXU6_JGCbgzJ2wMZKna_00N0NrJ9bGHc" class="card-img-top" alt="Imagem" style="object-fit: cover; height: 200px;"></a>
+                <div class="card-body">
+                  <h5 class="card-title" style="color: white;"><strong>Operacional</strong></h5>
+                  <p class="card-text" style="color: white;">Confira informações da produção de uma máquina específica em tempo real.</p>
+                    <br>
+                  <a href="/pag_form_prod" class="btn btn-primary">Avançar</a>
+                </div>
+              </div>
+
+              <div class="card" style="flex: 1 1 15rem; background-color: transparent; border-color: transparent;">
+<!--                https://drive.google.com/file/d/1Ag3ag5MFGio2J_GV8RjG_-5AAg8ufYwY/view?usp=drive_link-->
+                <a href="/dashboard"><img src="https://drive.google.com/uc?id=1Ag3ag5MFGio2J_GV8RjG_-5AAg8ufYwY" class="card-img-top" alt="Imagem" style="object-fit: cover; height: 200px;"></a>
+                <div class="card-body">
+                  <h5 class="card-title" style="color: white;"><strong>Dashboard 24Hr</strong></h5>
+                  <p class="card-text" style="color: white;">Confira a produção bruta de todas as máquinas, com base na data atual.</p>
+                  <br>
+                  <a href="/dashboard" class="btn btn-primary">Avançar</a>
+                </div>
+              </div>
+
+              <div class="card" style="flex: 1 1 15rem; background-color: transparent; border-color: transparent;">
+<!--                https://drive.google.com/file/d/15PAb8_DyKPQ_cDyoKia7AU9fT-bn9AyQ/view?usp=drive_link-->
+                <img src="https://drive.google.com/uc?id=15PAb8_DyKPQ_cDyoKia7AU9fT-bn9AyQ" class="card-img-top" alt="Imagem" style="object-fit: cover; height: 200px;">
+                <div class="card-body">
+                  <h5 class="card-title" style="color: white;"><strong>Apontar Perdas</strong></h5>
+                  <p class="card-text" style="color: white;">Aponte a quantidade e motivo de todas as peças com não conformidade.</p>
+                  <br>
+                  <a class="btn btn-primary">Avançar</a>
+                </div>
+              </div>
+
+              <div class="card" style="flex: 1 1 15rem; background-color: transparent; border-color: transparent;">
+<!--                  https://drive.google.com/file/d/1OrrhUho7-UNcqNZ9pGuOdZUD5NykAhcE/view?usp=drive_link-->
+                <img src="https://drive.google.com/uc?id=1OrrhUho7-UNcqNZ9pGuOdZUD5NykAhcE" class="card-img-top" alt="Imagem" style="object-fit: cover; height: 200px;">
+                <div class="card-body">
+                    <h5 class="card-title" style="color: white;"><strong>Inform. OP e Operador</strong></h5>
+                    <p class="card-text" style="color: white;">Informe a ordem de produção atual e o nome do operador responsável.</p>
+                    <br>
+                    <a class="btn btn-primary">Avançar</a>
+                </div>
+              </div>
+
+            </div>
+
+        </div>
+    </header>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+    <footer class=" px-5 py-10 ">
+        <ul class="flex justify-between items-center">
+
+            <li>&copy; 2023</li>
+            <li> Feito com Python (Django)</li>
+            <li>Condutec</li>
+        </ul>
+    </footer>
+
+{% endblock %}

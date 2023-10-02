@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    {% load static %}
+</head>
+<body>
+    <div class="card-body">
+        <h5 class="card-title" id="mostrar_hora_ultimo_ciclo">{{ mostrar_hora_ultimo_ciclo }}</h5>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            setInterval(function(){
+                $.ajax({
+                    url: "{% url 'filme:sua_view' %}",
+                    type: 'GET',
+                    success: function(data) {
+                        $('#mostrar_hora_ultimo_ciclo').html(data.mostrar_hora_ultimo_ciclo);
+                    }
+                });
+            }, 1000); // tempo em milissegundos
+        });
+    </script>
+</body>
+</html>

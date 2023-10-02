@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Máquinas em Tempo Real</title>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        canvas {
+            font-size: 20px;
+        }
+    </style>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+<body>
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h5 style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 50px;">Máquinas em Tempo Real</h5>
+        </div>
+    </div>
+
+    <div class="row justify-content-center align-items-center">
+        <h2 class="text-dark p-4" style="display: inline-block;">
+            {% block tem %}
+            {{ mostrar_data_hora_atual }}
+            {% endblock %}
+        </h2>
+
+        <button style="font-weight: bold; font-size: 30px; display: inline-block; height: 50px; text-align: center; line-height: 10px;" class="btn btn-dark" onclick="showLoading()">Atualizar</button>
+    </div>
+
+    <div id="loadingDiv" style="display: none; position: fixed; z-index: 999; top: 16%; left: 50%; transform: translate(-50%, -50%);">
+        <div class="spinner-border text-primary" role="status" style="width: 10rem; height: 10rem;">
+            <span class="visually-hidden"></span>
+        </div>
+    </div>
+
+    <script>
+        function showLoading() {
+            var loadingDiv = document.getElementById('loadingDiv');
+            loadingDiv.style.display = 'block';
+            setTimeout(function() {
+                location.reload();
+            }, 200); // Tempo de exemplo, ajuste conforme necessário
+        }
+    </script>
+
+    <div class="bar-mesclada-horizontal my-4">
+  <div class="bar-animada-interna"></div>
+</div>
+
+<style>
+ .bar-mesclada-horizontal {
+  width: 100%;
+  height: 6px;
+  border-radius: 50px;
+  background-image: linear-gradient(-45deg, #6C7B8B 0%, #E0FFFF 25%, #A9A9A9 50%, #6495ED 75%, #7F7F7F 100%);
+ }
+
+ .bar-animada-interna {
+  animation: animacaoBarra 7s linear infinite;
+  background-image: linear-gradient(-45deg, #7F7F7F 0%, #6495ED 25%, #A9A9A9 50%, #E0FFFF 75%, #6C7B8B 100%);
+  width: 0px;
+  border-radius: 50px;
+  height: 6px;
+ }
+
+ @keyframes animacaoBarra {
+  from {
+   width: 0px;
+  }
+  to {
+   width: 100%;
+  }
+ }
+</style>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h5 class="text-white bg-primary p-4">{% block content %}
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <h3 class="text-white" style="background-color: #0074BC; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">LX-01:</h3>
+                    </div>
+
+
+                    <div class="col-md-6" style="margin-left: 0px;">
+                        <p class="text-dark" style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">{{ luxor_producao_mostrar_status_de_producao }}</p>
+                    </div>
+
+
+                    <div class="col-md-6" style="margin-left: 0px;">
+                        <p class="text-dark" style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">{{ luxor_producao_mostrar_qtde_ciclos_do_dia_atual }}</p>
+                    </div>
+
+
+                    <div class="col-md-6" style="margin-left: 0px;">
+                        <p class="text-dark" style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">{{ luxor_producao_mostrar_hora_primeiro_ciclo_do_dia_atual }}</p>
+                    </div>
+
+
+                    <div class="col-md-6" style="margin-left: 0px;">
+                        <p class="text-dark" style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">{{ luxor_producao_mostrar_hora_ultimo_ciclo }}</p>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <h3 class="text-white" style="background-color: #0074BC; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">LR-04:</h3>
+                    </div>
+
+
+                    <div class="col-md-6" style="margin-left: 0px;">
+                        <p class="text-dark" style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">{{ lam04_producao_mostrar_status_de_producao }}</p>
+                    </div>
+
+
+                    <div class="col-md-6" style="margin-left: 0px;">
+                        <p class="text-dark" style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">{{ lam04_producao_mostrar_qtde_ciclos_do_dia_atual }}</p>
+                    </div>
+
+
+                    <div class="col-md-6" style="margin-left: 0px;">
+                        <p class="text-dark" style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">{{ lam04_producao_mostrar_hora_primeiro_ciclo_do_dia_atual }}</p>
+                    </div>
+
+
+                    <div class="col-md-6" style="margin-left: 0px;">
+                        <p class="text-dark" style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">{{ lam04_producao_mostrar_hora_ultimo_ciclo }}</p>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <h3 class="text-white" style="background-color: #0074BC; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">LR-05:</h3>
+                    </div>
+
+
+                    <div class="col-md-6" style="margin-left: 0px;">
+                        <p class="text-dark" style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">{{ lam05_producao_mostrar_status_de_producao }}</p>
+                    </div>
+
+
+                    <div class="col-md-6" style="margin-left: 0px;">
+                        <p class="text-dark" style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">{{ lam05_producao_mostrar_qtde_ciclos_do_dia_atual }}</p>
+                    </div>
+
+
+                    <div class="col-md-6" style="margin-left: 0px;">
+                        <p class="text-dark" style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">{{ lam05_producao_mostrar_hora_primeiro_ciclo_do_dia_atual }}</p>
+                    </div>
+
+
+                    <div class="col-md-6" style="margin-left: 0px;">
+                        <p class="text-dark" style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">{{ lam05_producao_mostrar_hora_ultimo_ciclo }}</p>
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <h3 class="text-white" style="background-color: #0074BC; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">DC-04:</h3>
+                    </div>
+
+
+                    <div class="col-md-6" style="margin-left: 0px;">
+                        <p class="text-dark" style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">{{ dc04_producao_mostrar_status_de_producao }}</p>
+                    </div>
+
+
+                    <div class="col-md-6" style="margin-left: 0px;">
+                        <p class="text-dark" style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">{{ dc04_producao_mostrar_qtde_ciclos_do_dia_atual }}</p>
+                    </div>
+
+
+                    <div class="col-md-6" style="margin-left: 0px;">
+                        <p class="text-dark" style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">{{ dc04_producao_mostrar_hora_primeiro_ciclo_do_dia_atual }}</p>
+                    </div>
+
+
+                    <div class="col-md-6" style="margin-left: 0px;">
+                        <p class="text-dark" style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">{{ dc04_producao_mostrar_hora_ultimo_ciclo }}</p>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <h3 class="text-white" style="background-color: #0074BC; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">DS-03:</h3>
+                    </div>
+
+
+                    <div class="col-md-6" style="margin-left: 0px;">
+                        <p class="text-dark" style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">{{ ds03_producao_mostrar_status_de_producao }}</p>
+                    </div>
+
+
+                    <div class="col-md-6" style="margin-left: 0px;">
+                        <p class="text-dark" style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">{{ ds03_producao_mostrar_qtde_ciclos_do_dia_atual }}</p>
+                    </div>
+
+
+                    <div class="col-md-6" style="margin-left: 0px;">
+                        <p class="text-dark" style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">{{ ds03_producao_mostrar_hora_primeiro_ciclo_do_dia_atual }}</p>
+                    </div>
+
+
+                    <div class="col-md-6" style="margin-left: 0px;">
+                        <p class="text-dark" style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">{{ ds03_producao_mostrar_hora_ultimo_ciclo }}</p>
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <h3 class="text-white" style="background-color: #0074BC; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">DW-02:</h3>
+                    </div>
+
+
+                    <div class="col-md-6" style="margin-left: 0px;">
+                        <p class="text-dark" style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">{{ dw02_producao_mostrar_status_de_producao }}</p>
+                    </div>
+
+
+                    <div class="col-md-6" style="margin-left: 0px;">
+                        <p class="text-dark" style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">{{ dw02_producao_mostrar_qtde_ciclos_do_dia_atual }}</p>
+                    </div>
+
+
+                    <div class="col-md-6" style="margin-left: 0px;">
+                        <p class="text-dark" style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">{{ dw02_producao_mostrar_hora_primeiro_ciclo_do_dia_atual }}</p>
+                    </div>
+
+
+                    <div class="col-md-6" style="margin-left: 0px;">
+                        <p class="text-dark" style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">{{ dw02_producao_mostrar_hora_ultimo_ciclo }}</p>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <h3 class="text-white" style="background-color: #0074BC; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">DW-03:</h3>
+                    </div>
+
+
+                    <div class="col-md-6" style="margin-left: 0px;">
+                        <p class="text-dark" style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">{{ dw03_producao_mostrar_status_de_producao }}</p>
+                    </div>
+
+
+                    <div class="col-md-6" style="margin-left: 0px;">
+                        <p class="text-dark" style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">{{ dw03_producao_mostrar_qtde_ciclos_do_dia_atual }}</p>
+                    </div>
+
+
+                    <div class="col-md-6" style="margin-left: 0px;">
+                        <p class="text-dark" style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">{{ dw03_producao_mostrar_hora_primeiro_ciclo_do_dia_atual }}</p>
+                    </div>
+
+
+                    <div class="col-md-6" style="margin-left: 0px;">
+                        <p class="text-dark" style="background-color: #ffffff; padding: 10px; border-radius: 10px; font-weight: bold; font-size: 30px;">{{ dw03_producao_mostrar_hora_ultimo_ciclo }}</p>
+                    </div>
+
+                </div>
+
+                {% endblock %}
+            </h5>
+        </div>
+    </div>
+</div>
+<br>
+
+
+    <canvas id="myChart"></canvas>
+
+    <script>
+        var options = {
+            plugins: {
+                tooltip: {
+                    titleFont: {
+                        size: 32
+                    },
+                    bodyFont: {
+                        size: 32
+                    }
+                },
+                legend: {
+                    labels: {
+                        font: {
+                            size: 32
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        ticks: {
+                            font: {
+                                size: 32
+                            }
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            font: {
+                                size: 32
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
+
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['LX-01', 'LR-04', 'LR-05', 'DC-04', 'DS-03', 'DW-02', 'DW-03'],
+                datasets: [{
+                    label: 'Produção Peças',
+                    data: [{{ luxor_producao_mostrar_pecas }}, {{ lam04_producao_mostrar_pecas }}, {{ lam05_producao_mostrar_pecas }}, {{ dc04_producao_mostrar_pecas }}, {{ ds03_producao_mostrar_pecas }}, {{ dw02_producao_mostrar_pecas }}, {{ dw03_producao_mostrar_pecas }}],
+                    backgroundColor: [
+                      'rgba(0, 128, 0, 0.6)',
+                      'rgba(54, 162, 235, 0.6)',
+                      'rgba(255, 206, 86, 0.6)',
+                      'rgba(75, 192, 192, 0.6)',
+                      'rgba(255, 99, 71, 0.6)',
+                      'rgba(153, 102, 255, 0.6)',
+                      'rgba(255, 99, 132, 0.6)'
+                    ]
+                }]
+            },
+            options: options
+        });
+    </script>
+
+
+</body>
+</html>
+
+
+

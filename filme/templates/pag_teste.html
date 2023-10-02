@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block titulo %}
+Criar Conta
+{% endblock %}
+
+{% block content %}
+
+    <header class="min-h-screen bg-black bg-opacity-50 bg-blend-overlay showcase border-gray-600 border-b-8 flex justify-center items-center bg-no-repeat" style="background-image: url('{% static 'imagens/background_netflix.jpg' %}'); width: 100%;">
+        <div class="z-10 h-full py-32 md:py-0 text-gray-100 text-center flex items-center flex-col" style="width: 100%;">
+
+            <div class="card-group" style="width: 100%;">
+                <div class="card" style="flex: 1 1 10rem; background-color: #A3C2E1;">
+                    <div class="card-body">
+                        <h5 class="card-title" style="color: black; font-size: 30px;"><strong>Especificar Paradas</strong></h5>
+                    </div><br><hr><br>
+
+                    <div>
+                        {% for item in lista_formatada_paradas %}
+                        <h5 class="card-title" style="color: black; font-size: 22px;"><strong>{{ item }}</strong></h5>
+
+                        <strong>Motivo:</strong>
+                        <input type="text" name="Motivo">
+
+                        <strong>Causa e Solução:</strong>
+                        <input type="text" name="Causa e Solução:">
+
+                        <a href="#" class="btn btn-primary">Apontar</a>
+                        <br><br><hr><br>
+                        {% endfor %}
+                    </div>
+
+<!--                    Neste div eu estou fazendo com que cada ítem da lista "lista_formatada_paradas" apareça no template,
+ para cada ítem precisa apareçer os inputs "Motivo" e "Causa e Solução", e ao apertar o botão "Apontar" precisa gravar no
+ banco de dados o que foi digitado nos inputs-->
+
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <footer class=" px-5 py-10 ">
+        <ul class="flex justify-between items-center">
+
+            <li>&copy; 2023</li>
+            <li> Feito com Python (Django)</li>
+            <li>Condutec</li>
+        </ul>
+    </footer>
+
+{% endblock %}

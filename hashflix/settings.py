@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,7 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-hx@+hr^6fzb!p7$2*&!)d(ryfgcx)6g4i(x3qu&th91v2^)32c'
+TOKEN_CSRF = os.getenv('TOKEN_CSRF')
+if TOKEN_CSRF:
+    SECRET_KEY = TOKEN_CSRF
+    CSRF_TRUSTED_ORIGINS = ['https://cdtmes-production.up.railway.app/']
+else:
+    SECRET_KEY = 'django-insecure-hx@+hr^6fzb!p7$2*&!)d(ryfgcx)6g4i(x3qu&th91v2^)32c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True

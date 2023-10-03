@@ -8,7 +8,13 @@ class Conexoes_SQL():
         conexao = ""
 
         if self.database == "cdtmes":
-            conexao = Conexoes_SQL('cdtmes').obter_conexao()
+            conexao = mysql.connector.connect(
+                # host='10.11.1.10',
+                host='177.47.167.82',
+                user='admin',
+                password='Admin@Condutec',
+                database='cdtmes',
+            )
 
         if self.database == "devpcp":
             conexao = mysql.connector.connect(

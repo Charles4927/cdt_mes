@@ -1,1 +1,1 @@
-web: python manage.py migrate && gunicorn hashflix.wsgi:application --timeout 120
+web: python manage.py migrate && gunicorn hashflix.wsgi:application --timeout 180

@@ -25,12 +25,12 @@ if TOKEN_CSRF:
     SECRET_KEY = TOKEN_CSRF
     CSRF_TRUSTED_ORIGINS = ['https://cdtmes-production.up.railway.app']
 else:
-    SECRET_KEY = 'django-insecure-hx@+hr^6fzb!p7$2*&!)d(ryfgcx)6g4i(x3qu&th91v2^)32c'
+    SECRET_KEY = 'django-insecure-@mg#ffx-gmaw)96b^dw%4e-+jp9al1a(m^z1qewgnc4s1ub%b9'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition

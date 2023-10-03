@@ -1,6 +1,7 @@
 import mysql.connector
 from datetime import date
 from .obj_maquinas_tabelas2 import Maquinas_Tabelas
+from .obj_conexoes_bco_dados import Conexoes_SQL
 
 
 # O objetivo desta classe é filtrar por data e horario e talvez somar os dados que precisar consultar nas tabelas sql resumo
@@ -44,14 +45,9 @@ class Trazer_Dados:
         #                  "PWD=Admin@Condutec;")
         # self.conexao = pyodbc.connect(dados_conexao)
 
-        self.conexao = mysql.connector.connect(
-            host='10.11.1.10',
-            user='admin',
-            password='Admin@Condutec',
-            database='cdtmes',
-        )
+        conexao = Conexoes_SQL('cdtmes').obter_conexao()
 
-        self.cursor = self.conexao.cursor()
+        self.cursor = conexao.cursor()
 
         colunas_requeridas = "producao, perdas, parada_aberta_data, parada_aberta_hora, parada_finalizada_data, parada_finalizada_hora, parada_motivo, parada_descricao, setup, ordem_de_producao, operador"
 

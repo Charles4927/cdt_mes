@@ -1,5 +1,6 @@
 from .obj_maquinas_tabelas2 import Maquinas_Tabelas
 from datetime import datetime, timedelta
+from .obj_conexoes_bco_dados import Conexoes_SQL
 import mysql.connector
 
 
@@ -40,13 +41,7 @@ class Tempo_Anterior_Parado:
         #                "PWD=Admin@Condutec;")
         # conexao = pyodbc.connect(dados_conexao)
 
-        conexao = mysql.connector.connect(
-            host='10.11.1.10',
-            # host='177.47.167.82',
-            user='admin',
-            password='Admin@Condutec',
-            database='cdtmes',
-        )
+        conexao = Conexoes_SQL('cdtmes').obter_conexao()
 
         cursor = conexao.cursor()
         comando = (f"SELECT parada_aberta_data, parada_aberta_hora, parada_finalizada_data, parada_finalizada_hora FROM {tabela_sql_resumo}")
